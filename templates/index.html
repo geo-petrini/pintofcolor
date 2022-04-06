@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>{{title}}</title>
 
-    <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.slim.min.js" integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 
     <link href="{{ url_for('static', filename='css/custom.css') }}" rel="stylesheet">
 
@@ -70,7 +70,7 @@
                 type: "POST",
                 url: '/save',
                 data: data,
-                //contentType: "application/json",
+                dataType: 'json',
                 success: function(data) {
                     console.log(data)
                     $('#message_holder').html(data.msg)
