@@ -5,7 +5,6 @@ import shutil
 import datetime
 from flask import Flask, flash, request, redirect, url_for, send_from_directory
 from flask import render_template
-from flask_socketio import SocketIO, emit
 from flask_sqlalchemy import SQLAlchemy
 
 
