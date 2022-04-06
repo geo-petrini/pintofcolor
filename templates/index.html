@@ -14,16 +14,21 @@
 
 <body>
 
-    <h1 style="color: blue">Message in a flask</h1>
+    <!-- Just an image -->
+    <nav class="navbar navbar-light bg-light">
+        <a class="navbar-brand" href="#">
+            <img src="/images/pint_big" width="128" height="128" alt="">
+        </a>
+    </nav>
 
-	<div class="container-fluid">
-		<div class="row">
-			<div class="col">	
-				{{data}}
-			</div>
-		</div>
-		
-<!--
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col">
+                {{data}}
+            </div>
+        </div>
+
+        <!--
 		<form  action="" method="POST">
 		<div class="row">
 			<div class="col">	
@@ -39,15 +44,14 @@
 				</div>	
 			</div>
 		</div>		
-	-->	
-		</form>							
-		<div class="row">
-			<ul class="list-group" id="message_holder"></div>		
-		</div>
-	</div>	
+	-->
+        </form>
+        <div class="row">
+            <ul class="list-group" id="message_holder">
+        </div>
+    </div>
+    </div>
     <script type="text/javascript" charset="utf-8">
-
-
         var form = $('form').on('submit', function(e) {
             e.preventDefault()
             let user_name = $('input.username').val()
