@@ -30,3 +30,14 @@ class Color(db.Model):
         self.color_name = color_name
         self.color_code = color_code
         self.ts = datetime.datetime.now()    
+
+    def insert(self):
+        db.session.add(self)
+        db.session.commit()
+    
+    def delete(self):
+        db.session.delete(self)
+        db.session.commit()    
+        
+    def update(self):
+        db.session.commit()        
