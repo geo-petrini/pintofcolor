@@ -40,13 +40,21 @@ def index():
 
 @app.route('/save', methods = ['POST'])
 def save():
-    logging.debug(f'saving data: {request}')
-    user = request.form['user']
-    color_name = request.form['color_name']
-    color_value = request.form['color_value']
-    
-    c = models.Color(user, color_name, color_value)
-    return {'result':'ok'}
+    try:
+        if request.method == 'POST':
+            logging.debug(f'saving data: {request.form}')
+            user = request.form['user']
+            color_name = request.form['color_name']
+            color_value = request.form['color_value']
+            
+            c = models.Color(user, color_name, color_value)
+
+            return {'result':'ok'}
+        else:
+            return {'result':'error'}
+    except Exception as e:
+        logging.exception('error saving data')
+        return {'result':'error'}
 
 
 @app.route('/create')
