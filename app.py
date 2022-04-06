@@ -52,11 +52,12 @@ def create():
 def ping():
     return 'Pong'
 
+'''
 @app.route('/images/<path:path>')
 def send_images(path):
     #this should be default
     return send_from_directory('images', path)
-
+'''
 
     
 
