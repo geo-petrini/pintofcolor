@@ -6,6 +6,7 @@ db = SQLAlchemy()
 
 def setup_db(app):   
     platform = os.getenv('WEB_PLATFORM')
+    database_path = None
     if platform == 'HEROKU_POSTGRESQL':
         database_name ='local_db_name'
         default_database_path= "postgresql://{}:{}@{}/{}".format('postgres', 'password', 'localhost:5432', database_name)
@@ -14,8 +15,8 @@ def setup_db(app):
             database_path = database_path.replace('postgres:', 'postgresql:') 
 
     if platform == 'PYTHONANYWHERE_MYSQL':
-        database_path = os.os.getenv('DATABASE_URL')
-        
+        database_path = os.os.getenv('DATABASE_URL', None)
+
     app.config["SQLALCHEMY_DATABASE_URI"] = database_path
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
     db.app = app
