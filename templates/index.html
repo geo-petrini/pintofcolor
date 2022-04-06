@@ -16,7 +16,7 @@
 <body>
 
     <!-- Just an image -->
-    <nav class="navbar navbar-light bg-light">
+    <nav class="navbar navbar-light bg-light" id="navbar">
         <a class="navbar-brand" href="#">
             <img src="/static/images/pint_big.png" width="64" height="64" alt=""> Pint of colors
         </a>
@@ -24,10 +24,14 @@
 
     <div class="container-fluid">
         <div id="colorPicker">
-            <a class="color"><div class="colorInner"></div></a>
+            <a class="color">
+                <div class="colorInner"></div>
+            </a>
             <div class="track"></div>
-            <ul class="dropdown"><li></li></ul>
-            <input type="hidden" class="colorInput"/>
+            <ul class="dropdown">
+                <li></li>
+            </ul>
+            <input type="hidden" class="colorInput" />
         </div>
 
         <div class="row">
@@ -35,6 +39,23 @@
                 {{data}}
             </div>
         </div>
+
+        <form action="" method="POST">
+            <div class="row">
+                <div class="col">
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <input type="text" class="form-control user" placeholder="Username">
+                        </div>
+
+                        <input type="text" class="form-control color_value" placeholder="Color">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-primary" type="submit" id="button-addon2">Send</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
 
         <!--
 		<form  action="" method="POST">
@@ -59,22 +80,79 @@
         </div>
     </div>
     </div>
-	<script type="text/javascript">
-		$(document).ready(function()
-        {
-			var $box = $('#colorPicker');
+    <script type="text/javascript">
+        $(document).ready(function() {
+            var $box = $('#colorPicker');
             $box.tinycolorpicker();
-		});
-	</script>
+        });
+    </script>
 
     <script type="text/javascript" charset="utf-8">
         var form = $('form').on('submit', function(e) {
             e.preventDefault()
-            let user_name = $('input.username').val()
-            let user_input = $('input.message').val()
+            let user = $('input.username').val()
+            let color_value = $('input.color_value').val()
+            let color_name = ''
+            let data = {
+                'user': user,
+                'color_name': color_name,
+                'color_value': color_value
+            }
+            var jqxhr = $.ajax({
+                type: "POST",
+                url: '/save',
+                data: data,
+                contentType: "application/json",
+                success: function(data) {
+                    console.log(data)
+                    $('#message_holder').html(data.msg)
+                },
+                error: function(data) {
+                    console.log(data)
+                    $('#message_holder').html(data.msg)
+                },
 
-            $('input.message').val('').focus()
+            });
+
+
         })
+    </script>
+
+    <script type="text/javascript">
+        /*
+                background animations
+                https://codepen.io/loktar00/pen/BaGqXY  ++ tetris
+                https://codepen.io/toshiya-marukubo/pen/MWyKxEb
+                https://codepen.io/alexzaworski/pen/mEZvrG
+                https://codepen.io/Tibixx/pen/xmOaWe        +++
+                https://codepen.io/TC5550/pen/WNNWoaO
+                https://codepen.io/seanfree/pen/PxJyEW
+                https://codepen.io/tutsplus/pen/jOBmwQm
+                */
+
+        const background = document.getElementById("navbar");
+
+        const getRandomNumber = (limit) => {
+            return Math.floor(Math.random() * limit);
+        };
+
+        const getRandomColor = () => {
+            const h = getRandomNumber(360);
+
+            return `hsl(${h}deg, 100%, 90%)`;
+        };
+
+        const setBackgroundColor = () => {
+            const randomColor = getRandomColor();
+            background.style.backgroundColor = randomColor;
+            background.style.color = randomColor;
+        };
+
+        setBackgroundColor()
+
+        setInterval(() => {
+            setBackgroundColor();
+        }, 1500);
     </script>
 </body>
 

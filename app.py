@@ -38,6 +38,16 @@ def index():
     content = 'test content'
     return render_template("index.html", data=content, title='Pint of colors - index')
 
+@app.route('/save', methods = ['POST'])
+def save():
+    logging.debug(f'saving data: {request}')
+    user = request.form['user']
+    color_name = request.form['color_name']
+    color_value = request.form['color_value']
+    
+    c = models.Color(user, color_name, color_value)
+    return {'result':'ok'}
+
 
 @app.route('/create')
 def create():
