@@ -15,7 +15,7 @@ def setup_db(app):
             database_path = database_path.replace('postgres:', 'postgresql:') 
 
     if platform == 'PYTHONANYWHERE_MYSQL':
-        database_path = os.os.getenv('DATABASE_URL', None)
+        database_path = os.getenv('DATABASE_URL', None)
 
     app.config["SQLALCHEMY_DATABASE_URI"] = database_path
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
