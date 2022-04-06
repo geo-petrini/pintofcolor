@@ -36,7 +36,7 @@ def favicon():
 @app.route('/index')
 def index():
     content = 'test content'
-    return render_template("index.html", data=content, title='Mypage - index')
+    return render_template("index.html", data=content, title='Pint of colors - index')
 
 
 @app.route('/create')
