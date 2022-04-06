@@ -18,14 +18,7 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = 'chiave segreta ma non molto'    #usata da alcuni moduli quindi la creo anche se per ora non serve
 
 models.setup_db(app)
-
-def print_config():
-    str = ''
-    for key, value in all.config.items():
-        str += f"'{key}':{value}\n"
-    return str
-
-logging.debug(f'config: '+ print_config())    
+logging.debug(f'config: {app.config}')    
 
 @app.route('/')
 def home():
