@@ -5,7 +5,8 @@ import shutil
 import datetime
 from flask import Flask, flash, request, redirect, url_for, send_from_directory
 from flask import render_template
-from flask_sqlalchemy import SQLAlchemy
+#from flask_sqlalchemy import SQLAlchemy
+import models
 
 
 status = None
@@ -16,11 +17,10 @@ logging.basicConfig(datefmt='%Y-%m-%d %H:%M:%S', format='[%(asctime)s][%(levelna
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'chiave segreta ma non molto'    #usata da alcuni moduli quindi la creo anche se per ora non serve
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///wordcount_dev'
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
-db = SQLAlchemy(app)
-
-socketio = SocketIO(app)
+models.setup_db(app)
+#app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///wordcount_dev'
+#app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
+#db = SQLAlchemy(app)
 
 
 @app.route('/')
@@ -42,7 +42,7 @@ def index():
 @app.route('/create')
 def create():
     try:
-        db.create_all()
+        models.db_drop_and_create()
         return 'db created'
     except:
         logging.exception('error creating db')
@@ -53,19 +53,7 @@ def ping():
     return 'Pong'
 
 
-class Color(db.Model):
-    __tablenane__ = 'colors'
-    id = db.Column(db.Integer, primary_key=True)
-    user = db.Column(db.String(255))
-    color_name = db.Column(db.String(255))
-    color_code = db.Column(db.String(8))
-    ts = db.Column(db.DateTime)
-    
-    def __init__(self, user, color_name, color_code):
-        self.user = user
-        self.color_name = color_name
-        self.color_code = color_code
-        self.ts = datetime.datetime.now()
+
     
 
 if __name__ == "__main__":
