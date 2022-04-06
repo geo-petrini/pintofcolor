@@ -18,20 +18,14 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = 'chiave segreta ma non molto'    #usata da alcuni moduli quindi la creo anche se per ora non serve
 
 models.setup_db(app)
-#app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///wordcount_dev'
-#app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
-#db = SQLAlchemy(app)
-
 
 @app.route('/')
 def home():
     return redirect(url_for('index'))
 
-
 @app.route('/favicon.ico')
 def favicon():
     return send_from_directory(os.path.join(app.root_path, 'static'), 'favicon.ico', mimetype='image/vnd.microsoft.icon')
-
 
 @app.route('/index')
 def index():
@@ -48,6 +42,7 @@ def save():
             color_value = request.form['color_value']
             
             c = models.Color(user, color_name, color_value)
+            c.insert()
 
             return {'result':'ok'}
         else:
@@ -55,7 +50,6 @@ def save():
     except Exception as e:
         logging.exception('error saving data')
         return {'result':'error'}
-
 
 @app.route('/create')
 def create():
@@ -69,15 +63,6 @@ def create():
 @app.route('/ping')
 def ping():
     return 'Pong'
-
-'''
-@app.route('/images/<path:path>')
-def send_images(path):
-    #this should be default
-    return send_from_directory('images', path)
-'''
-
-    
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT",5000))
