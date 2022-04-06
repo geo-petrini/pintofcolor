@@ -17,7 +17,7 @@ logging.basicConfig(datefmt='%Y-%m-%d %H:%M:%S', format='[%(asctime)s][%(levelna
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'chiave segreta ma non molto'    #usata da alcuni moduli quindi la creo anche se per ora non serve
-load_dotenv(os.path.join( os.environ['HOME', '.'], '.env')) #load extra env variables from custom .env file (not in repo)
+load_dotenv(os.path.join( os.getenv('HOME', '.'), '.env')) #load extra env variables from custom .env file (not in repo)
 models.setup_db(app)
 logging.debug(f'config: {app.config}')    
 logging.debug(f'env: {os.environ}')
