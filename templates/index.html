@@ -14,31 +14,18 @@
     <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
     <script type="text/javascript" src="{{ url_for('static', filename='js/bootstrap.bundle.min.js')}}"></script>
 
-    <link href="{{ url_for('static', filename='css/tinycolorpicker.css') }}" rel="stylesheet">
-    <script type="text/javascript" src="{{ url_for('static', filename='js/tinycolorpicker.js')}}"></script>
 </head>
 
 <body>
 
     <!-- Just an image -->
-    <nav class="navbar navbar-light bg-light transient_background" id="navbar">
+    <nav class="navbar navbar-light transient_background" id="navbar">
         <a class="navbar-brand" href="#">
             <img src="/static/images/pint_big.png" width="64" height="64" alt=""> Pint of colors
         </a>
     </nav>
 
     <div class="container-fluid">
-        <div id="colorPicker">
-            <a class="color">
-                <div class="colorInner"></div>
-            </a>
-            <div class="track"></div>
-            <ul class="dropdown">
-                <li></li>
-            </ul>
-            <input type="hidden" class="colorInput" />
-        </div>
-
         <div class="row">
             <div class="col">
                 {{data}}
@@ -67,13 +54,6 @@
         </div>
     </div>
 
-    <script type="text/javascript">
-        $(document).ready(function() {
-            var $box = $('#colorPicker');
-            $box.tinycolorpicker();
-        });
-    </script>
-
     <script type="text/javascript" charset="utf-8">
         var form = $('form').on('submit', function(e) {
             e.preventDefault()
@@ -85,11 +65,12 @@
                 'color_name': color_name,
                 'color_value': color_value
             }
-            var jqxhr = $.ajax({
+
+            $.ajax({
                 type: "POST",
                 url: '/save',
                 data: data,
-                contentType: "application/json",
+                //contentType: "application/json",
                 success: function(data) {
                     console.log(data)
                     $('#message_holder').html(data.msg)
