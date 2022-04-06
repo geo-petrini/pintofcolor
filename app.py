@@ -19,6 +19,8 @@ app.config['SECRET_KEY'] = 'chiave segreta ma non molto'    #usata da alcuni mod
 
 models.setup_db(app)
 logging.debug(f'config: {app.config}')    
+logging.debug(f'env: {os.environ}')
+
 
 @app.route('/')
 def home():
