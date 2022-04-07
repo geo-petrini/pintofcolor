@@ -80,10 +80,11 @@ def log():
                 f = open(log, 'r')
                 for line in f.readlines():
                     m = re.search(pattern, line)
-                    line_date = m.group('date')
-                    line_time = m.group('time')
-                    line_msg = m.group('msg')
-                    content.append( {'date':line_date, 'time':line_time, 'msg':line_msg} )
+                    if m:
+                        line_date = m.group('date')
+                        line_time = m.group('time')
+                        line_msg = m.group('msg')
+                        content.append( {'date':line_date, 'time':line_time, 'msg':line_msg} )
                 f.close()
     except:
         logging.exception('error reading log')
