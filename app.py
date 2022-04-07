@@ -95,9 +95,15 @@ def log():
     
     return render_template("log.html", data=content, title='Pint of colors - log')
 
-@app.route('/ping')
+@app.route('/ping', methods = ['POST'])
 def ping():
-    return 'Pong'
+    if request.method == 'GET':
+        logging.info('data sent: ' + request.args)
+        return 'pong: ' + request.args
+    if request.method == 'POST':
+        logging.info('data sent: ' + request.form)
+        return 'pong: ' + request.form    
+    return 'pong'
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT",5000))
