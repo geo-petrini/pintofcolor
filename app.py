@@ -102,7 +102,7 @@ def ping():
         return f'data sent: {request.args}'
     if request.method == 'POST':
         logging.info(f'data sent: {request.data}')
-        return f'data sent: {request.data}'
+        return f'data sent: {request.get_json(force=True) }'
     return 'pong'
 
 if __name__ == "__main__":
