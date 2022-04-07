@@ -80,6 +80,9 @@ def log():
                 content.append('-------------------------------------')
                 f = open(log, 'r')
                 content.extend(f.readlines())
+                data = f.read()
+                lines = data.split('\n')
+                content.extend(lines)
                 f.close()
     except:
         logging.exception('error reading log')

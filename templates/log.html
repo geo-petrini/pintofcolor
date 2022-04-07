@@ -30,11 +30,10 @@
             <div class="col">
 				<ul class="list-group">
 				{{
-				for line in data.split('\n'):
-				<li class="list-group-item">{line}</li>
-				pass
+					for line in data:
+					<li class="list-group-item">{line}</li>
+					pass
 				}}
-                
 				</ul>
             </div>
         </div>
