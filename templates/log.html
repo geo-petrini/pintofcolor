@@ -29,8 +29,8 @@
     {% for line in data: %}
         <div class="row">
         {% if 'date' in line and 'time' in line and 'msg' in line: %}
-            <div class="col-1 bg-primary">{{line['date']}}</div>
-            <div class="col-1 bg-secondary">{{line['time']}}</div>
+            <div class="col-1 bg-primary align-top">{{line['date']}}</div>
+            <div class="col-1 bg-secondary align-top">{{line['time']}}</div>
             <div class="col">{{line['msg']}}</div>    
         {% else: %}
             <div class="col">{{line}}</div>
