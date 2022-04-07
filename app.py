@@ -95,13 +95,13 @@ def log():
     
     return render_template("log.html", data=content, title='Pint of colors - log')
 
-@app.route('/ping', methods = ['POST'])
+@app.route('/ping', methods = ['GET', 'POST'])
 def ping():
     if request.method == 'GET':
-        logging.info('data sent: ' + request.args)
+        logging.info(f'data sent: {request.args}')
         return 'pong: ' + request.args
     if request.method == 'POST':
-        logging.info('data sent: ' + request.form)
+        logging.info(f'data sent: {request.form}')
         return 'pong: ' + request.form    
     return 'pong'
 
