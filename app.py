@@ -79,7 +79,7 @@ def log():
         logging.exception('error reading log')
         content = 'error reading log'
     
-    return render_template("index.html", data=content, title='Pint of colors - log')
+    return render_template("log.html", data=content, title='Pint of colors - log')
 
 @app.route('/ping')
 def ping():
