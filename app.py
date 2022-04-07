@@ -21,8 +21,8 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = 'chiave segreta ma non molto'    #usata da alcuni moduli quindi la creo anche se per ora non serve
 load_dotenv(os.path.join( os.getenv('HOME', '.'), '.env')) #load extra env variables from custom .env file (not in repo)
 models.setup_db(app)
-logging.debug(f'config: {app.config}')    
-logging.debug(f'env: {os.environ}')
+#logging.debug(f'config: {app.config}')    
+#logging.debug(f'env: {os.environ}')
 
 
 @app.route('/')
@@ -84,14 +84,10 @@ def log():
                     line_time = m.group('time')
                     line_msg = m.group('msg')
                     content.append( {'date':line_date, 'time':line_time, 'msg':line_msg} )
-                #content.extend(f.readlines())
-                #data = f.read()
-                #lines = data.split('\n')
-                #content.extend(lines)
                 f.close()
     except:
         logging.exception('error reading log')
-        content = 'error reading log'
+        content = ['error reading log']
     
     return render_template("log.html", data=content, title='Pint of colors - log')
 
