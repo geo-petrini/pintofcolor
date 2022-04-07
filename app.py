@@ -105,8 +105,8 @@ def ping():
         logging.info(f'data sent: {repr(request)}')
         return f'data sent: {repr(request) }'
     '''
-    logging.info(f'data sent: {repr(request)}')
-    return f'data sent: {repr(request) }'
+    logging.info(f'data sent: {repr(request.values)}')
+    return f'data sent: {repr(request.values) }'
     #return 'pong'
 
 if __name__ == "__main__":
