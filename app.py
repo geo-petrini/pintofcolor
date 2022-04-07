@@ -68,18 +68,18 @@ def create():
 @app.route('/log')
 def log():
     logtype = 'server'
-    content = ''
+    content = []
     try:
         platform = os.getenv('WEB_PLATFORM')
         if platform == 'PYTHONANYWHERE_MYSQL':
             logfolder = '/var/log'
             logs = glob.glob(f'{logfolder}/*{logtype}.log')
             for log in logs:
-                content += '-------------------------------------\n'
-                content += '{log}\n'
-                content += '-------------------------------------\n'
+                content.append('-------------------------------------')
+                content.append('{log}')
+                content.append('-------------------------------------')
                 f = open(log, 'r')
-                content += f.read()
+                content.extend(f.readlines())
                 f.close()
     except:
         logging.exception('error reading log')
