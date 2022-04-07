@@ -97,17 +97,15 @@ def log():
 
 @app.route('/ping', methods = ['GET', 'POST'])
 def ping():
-    '''
+    
     if request.method == 'GET':
-        logging.info(f'data sent: {request.values}')
-        return f'data sent: {request.values}'
+        logging.info(f'data sent: {request.args}')
+        return f'data sent: {request.args}'
     if request.method == 'POST':
-        logging.info(f'data sent: {repr(request)}')
-        return f'data sent: {repr(request) }'
-    '''
-    logging.info(f'data sent: {repr(request.values)}')
-    return f'data sent: {repr(request.values) }'
-    #return 'pong'
+        logging.info(f'data sent: {repr(request.form)}')
+        return f'data sent: {request.form}'
+
+    return 'pong'
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT",5000))
