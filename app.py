@@ -4,6 +4,7 @@ import logging
 import shutil
 import datetime
 import glob
+import re
 from dotenv import load_dotenv
 from flask import Flask, flash, request, redirect, url_for, send_from_directory
 from flask import render_template
@@ -68,6 +69,7 @@ def create():
 @app.route('/log')
 def log():
     logtype = 'server'
+    pattern = '(?P<date>\d{4}-\d{2}-\d{2})\s(?P<time>\d{2}:\d{2}:\d{2})\s(?P<msg>.*)'
     content = []
     try:
         platform = os.getenv('WEB_PLATFORM')
@@ -75,11 +77,14 @@ def log():
             logfolder = '/var/log'
             logs = glob.glob(f'{logfolder}/*{logtype}.log')
             for log in logs:
-                content.append('-------------------------------------')
-                content.append('{log}')
-                content.append('-------------------------------------')
                 f = open(log, 'r')
-                content.extend(f.readlines())
+                for line in f.readlines():
+                    m = re.search(pattern, line)
+                    line_date = m.group('date')
+                    line_time = m.group('time')
+                    line_msg = m.group('msg')
+                    content.append( {'date':line_date, 'time':line_time, 'msg':line_msg] )
+                #content.extend(f.readlines())
                 #data = f.read()
                 #lines = data.split('\n')
                 #content.extend(lines)
