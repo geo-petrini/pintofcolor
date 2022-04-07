@@ -98,10 +98,10 @@ def log():
 @app.route('/ping', methods = ['GET', 'POST'])
 def ping():
     if request.method == 'GET':
-        logging.info(f'data sent: {request.args}')
-        return f'data sent: {request.args}'
+        logging.info(f'data sent: {request.values}')
+        return f'data sent: {request.values}'
     if request.method == 'POST':
-        logging.info(f'data sent: {request.data}')
+        logging.info(f'data sent: {request.get_json(force=True)}')
         return f'data sent: {request.get_json(force=True) }'
     return 'pong'
 
