@@ -64,6 +64,23 @@ def create():
         logging.exception('error creating db')
         return 'error creating db'
 
+@app.route('/log')
+def log():
+    logtype = 'server'
+    content = ''
+    try:
+        platform = os.getenv('WEB_PLATFORM')
+        if platform == 'PYTHONANYWHERE_MYSQL':
+            logname = f'{os.getenv("LOGNAME")}.pythonanywhere.com.{logtype}.log'
+            f = open(f'/var/log/{logname}', 'r')
+            content = f.readlines()
+            f.close()
+    except:
+        logging.exception('error reading log')
+        content = 'error reading log'
+    
+    return render_template("index.html", data=content, title='Pint of colors - log')
+
 @app.route('/ping')
 def ping():
     return 'Pong'
