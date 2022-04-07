@@ -83,7 +83,7 @@ def log():
                     line_date = m.group('date')
                     line_time = m.group('time')
                     line_msg = m.group('msg')
-                    content.append( {'date':line_date, 'time':line_time, 'msg':line_msg] )
+                    content.append( {'date':line_date, 'time':line_time, 'msg':line_msg} )
                 #content.extend(f.readlines())
                 #data = f.read()
                 #lines = data.split('\n')

@@ -26,17 +26,17 @@
     </nav>
 
     <div class="container-fluid">
-	{% for line in data: %}
+    {% for line in data: %}
         <div class="row">
-		{% if 'date' in line and 'time' in line and 'msg' in line: %}
-			<div class="col-1 bg-primary">{{line['date']}}</div>
-			<div class="col-1 bg-secondary">{{line['time']}}</div>
-			<div class="col">{{line['msg']}}</div>	
-		{% else: %}
+        {% if 'date' in line and 'time' in line and 'msg' in line: %}
+            <div class="col-1 bg-primary">{{line['date']}}</div>
+            <div class="col-1 bg-secondary">{{line['time']}}</div>
+            <div class="col">{{line['msg']}}</div>    
+        {% else: %}
             <div class="col">{{line}}</div>
-		{% endif %}
+        {% endif %}
         </div>
-	{% endfor %}
+    {% endfor %}
     </div>
 
 </body>
