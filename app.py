@@ -3,6 +3,7 @@ import sys
 import logging
 import shutil
 import datetime
+import glob
 from dotenv import load_dotenv
 from flask import Flask, flash, request, redirect, url_for, send_from_directory
 from flask import render_template
@@ -71,11 +72,15 @@ def log():
     try:
         platform = os.getenv('WEB_PLATFORM')
         if platform == 'PYTHONANYWHERE_MYSQL':
-            envuser = os.getenv('USER')
-            logname = f'{envuser}.pythonanywhere.com.{logtype}.log'
-            f = open(f'/var/log/{logname}', 'r')
-            content = f.readlines()
-            f.close()
+            logfolder = '/var/log'
+            logs = glob.glob(f'{logfolder}/*{logtype}.log')
+            for log in logs:
+                content += '-------------------------------------\n'
+                content += '{log}\n'
+                content += '-------------------------------------\n'
+                f = open(log, 'r')
+                content += f.read()
+                f.close()
     except:
         logging.exception('error reading log')
         content = 'error reading log'
