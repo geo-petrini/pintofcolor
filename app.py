@@ -103,6 +103,8 @@ def ping():
         return f'data sent: {request.args.to_dict(flat=False)}'
     if request.method == 'POST':
         logging.info(f'data sent: {repr(request.form.to_dict(flat=False))}')
+        logging.info(f'data sent: {repr(request.form.values()}')
+        logging.info(f'data sent: {repr(request.form.listvalues()}')
         return f'data sent: {request.form.to_dict(flat=False)}'
 
     return 'pong'
