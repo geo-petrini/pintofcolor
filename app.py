@@ -99,10 +99,10 @@ def log():
 def ping():
     if request.method == 'GET':
         logging.info(f'data sent: {request.args}')
-        return 'pong: ' + request.args
+        return f'data sent: {request.args}'
     if request.method == 'POST':
-        logging.info(f'data sent: {request.form}')
-        return 'pong: ' + request.form    
+        logging.info(f'data sent: {request.form.to_dict()}')
+        return f'data sent: {request.form.to_dict()}'
     return 'pong'
 
 if __name__ == "__main__":
