@@ -99,7 +99,7 @@ def ping():
         return f'data sent: {request.args.to_dict(flat=False)}'
     if request.method == 'POST':
         logging.info(f'keys form: {request.form.keys()}, values: {request.form.values()}')
-        logging.info(f'keys data: {request.data.keys()}, values: {request.data.values()}')
+        logging.info(f'keys data: {request.data}, values: {request.data}')
 
         logging.info(f'request.form repr: {repr(request.form)}')
         logging.info(f'request.form to_dict: {request.form.to_dict(flat=False)}')
