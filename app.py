@@ -71,8 +71,8 @@ def log():
     try:
         platform = os.getenv('WEB_PLATFORM')
         if platform == 'PYTHONANYWHERE_MYSQL':
-            lognameenv = os.getenv('LOGNAME')
-            logname = f'{lognameenv}.pythonanywhere.com.{logtype}.log'
+            envuser = os.getenv('USER')
+            logname = f'{envuser}.pythonanywhere.com.{logtype}.log'
             f = open(f'/var/log/{logname}', 'r')
             content = f.readlines()
             f.close()
