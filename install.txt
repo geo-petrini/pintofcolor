@@ -1,0 +1,33 @@
+deploy on pythonanywhere
+
+delete default flask application
+rm -rf mysite/
+
+clone repo
+git clone [URL] ~/mysite
+
+
+create venv:
+mkvirtualenv --python=/usr/bin/python3.8 myvenv
+
+activate venv (if not active):
+workong myvenv
+
+add "myvenv" in web app page
+
+install requirements:
+pip install -r ~/mysite/requirements.txt
+
+check installed packages:
+pip list
+
+create db env variables (if required by application):
+touch ~/.env
+
+
+reload script:
+#!/bin/bash
+cd ~/mysite
+git pull
+touch /var/www/geopetriniedu_pythonanywhere_com_wsgi.py
+
